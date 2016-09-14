@@ -1,0 +1,8 @@
+body #image_input_container {
+    text-align: center;
+}
+
+.top-buffer { margin-top:20px; }
+
+body #image_selection_submit { display: none; }
+body #image_selection_label { display: none; padding-right: 74px }

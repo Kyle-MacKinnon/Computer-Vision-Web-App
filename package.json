@@ -1,0 +1,24 @@
+{
+  "name": "steam-web-app",
+  "version": "1.0.0",
+  "description": "A basic implemenation of the Steam API",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thaloman/Steam-Web-App.git"
+  },
+  "author": "Kyle MacKinnon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Thaloman/Steam-Web-App/issues"
+  },
+  "homepage": "https://github.com/Thaloman/Steam-Web-App#readme"
+}

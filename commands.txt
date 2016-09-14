@@ -1,0 +1,17 @@
+
+# Start the server
+browser-sync start --server --files "*"
+
+# Start github
+git init
+
+# Update github
+git add -A
+git commit -m <message>
+git push
+
+# Initiate npm
+npm init
+
+# Install bootstrap
+npm install bootstrap --save

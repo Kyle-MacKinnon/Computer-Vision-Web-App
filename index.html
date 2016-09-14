@@ -1,0 +1,73 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  
+  <title>Computer Vision Demo</title>
+
+  <!-- Meta Data -->
+  <meta charset="utf-8">
+  <meta name="description" content="A basic demonstration of the Steam API">
+  <meta name="author" content="Kyle MacKinnon">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- My CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+   
+  <!-- Bootstrap -->
+  <link rel="stylesheet" type="text/css" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+</head>
+
+<body>
+  
+  <!-- Website layout-->
+  <div class="jumbotron text-center">
+    <img src="eye-logo.png" alt="Logo of abstractly drawn eye. ">
+    <h1>Computer Vision API</h1>
+    <p>A simple demonstration of the Microsoft Cognative Services computer vision API</p>
+  </div>
+
+  <!-- Image Input -->
+  <div class="container" id="image_input_container">
+      <div class="form-group">
+      <form action="" id="image_selection_form">
+        <div class = "col-xs-12 top-buffer">
+        <label class="btn btn-default btn-file">Browse for an image<input type="file" name="pic" accept="image/*" id="image_selection_input" style="display: none;"></label>
+        </div>
+          <div class = "col-xs-12  top-buffer">
+          <div class="input-group">
+            <span class="input-group-btn"><input type="submit" class="btn btn-primary" style="display: none;", id ="image_selection_submit"></span>
+            <label id="image_selection_label" class="form-control"></label>
+          </div>
+          </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Statistics -->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+
+
+      </div>
+      <div class="col-sm-4">
+
+
+      </div>
+      <div class="col-sm-4">
+
+
+      </div>
+    </div>
+  </div>
+  
+  <!-- jQuery -->
+  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+
+  <!-- My script file -->
+  <script src="./js/main.js"></script
+
+</body>
+</html>
