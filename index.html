@@ -32,21 +32,35 @@
   <div class="container" id="image_input_container">
     <div class="form-group">
       <form action="" id="image_selection_form">
+
         <div class = "col-xs-12 top-buffer">
         <label class="btn btn-default btn-file">Browse for an image<input type="file" name="pic" accept="image/*" id="image_selection_input" style="display: none;"></label>
         </div>
-        <div class = "col-xs-12  top-buffer">
+
+        <div class = "col-xs-12  top-buffer" id="image_selection_submit_column">
           <div class="input-group">
-            <span class="input-group-btn"><input type="submit" class="btn btn-primary" style="display: none;", id ="image_selection_submit"></span>
+            <span class="input-group-btn"><input type="submit" class="btn btn-primary" style="display: none;", id ="image_selection_submit" ></span>
             <label id="image_selection_label" class="form-control"></label>
           </div>
         </div>
+
+        <div class = "col-xs-12  top-buffer">
+          <img class="img-thumbnail" alt="Your chosen image" id="image_selection_chosen_image" style="display: none;" width=256px height=256px>
+        </div>
+
       </form>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div class="container" id="image_descrption_load_container" style="display: none;">
+    <div class="col-xs-12">
+      <h3>Loading...</h3>
     </div>
   </div>
   
   <!-- Image Description -->
-  <div class="container">
+  <div class="container" id="image_description_container">
     
     <div class="col-xs-12">
     <!-- Description -->

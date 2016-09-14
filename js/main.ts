@@ -11,6 +11,15 @@
         // Stop page refresh after form submission
         event.preventDefault();
 
+        // Hide selection submission
+        $("#image_selection_submit_column").hide();
+
+        // Hide the old description if there was one
+        $("#image_description_container").hide();
+
+        // Show loading message
+        $("#image_descrption_load_container").show();
+
         // Get image file
         var file : File = (<HTMLInputElement> this[0]).files[0];
         
@@ -50,9 +59,20 @@
     Image file description
 */
 function describeImage(data) : void {
-    $("#desc_table_body tr").empty;
-    $("#desc_sentence").append(data.description.captions[0].text);
+
+    $("#image_descrption_load_container").hide();
+    $("#image_description_container").show();
+
+    $("#desc_sentence").empty();
+
+    // Make the description look more appealing
+    var captionText : string = data.description.captions[0].text;
+    captionText = captionText.charAt(0).toUpperCase() + captionText.slice(1) + ".";
+
+    $("#desc_sentence").append(captionText);
+
     $("#desc_table_body").empty();
+
     var tags : string = "";
     for (let tag of data.description.tags) {
         tags += tag;
@@ -61,6 +81,7 @@ function describeImage(data) : void {
         }
     }
     tags = tags.substring(0,tags.length -2)
+    
     $("#desc_table_body").append("<tr><td>Confidence:</td><td>" + data.description.captions[0].confidence + "</td></tr><tr><td>Tags:</td><td>" + tags + "</td></tr>");
 }
 
@@ -68,8 +89,19 @@ function describeImage(data) : void {
     Image selection form update
 */
  $('#image_selection_form').on('change', function() : void {
+
     var file : File = (<HTMLInputElement> this[0]).files[0];
+
     $('#image_selection_label')[0].innerText = file.name;
     $('#image_selection_label').show();
     $('#image_selection_submit').show();
+    $('#image_selection_chosen_image').show();
+
+    var reader = new FileReader();
+    reader.onload = function (e : any) {
+        $('#image_selection_chosen_image').attr("src", e.target.result);
+    };
+    reader.readAsDataURL(this[0].files[0]);
+
+    $("#image_selection_submit_column").show();
 });
