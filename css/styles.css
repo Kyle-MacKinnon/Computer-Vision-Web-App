@@ -66,4 +66,5 @@ body #desc_table_body tr td:first-child { width:20%; font-weight:bold;}
 .label-primary {
     font-size: 25px;
     width:175px;
+    text-shadow: -2px 2px 3px #1c4263;
 }
