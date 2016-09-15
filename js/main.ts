@@ -15,10 +15,10 @@
         $("#image_selection_submit_column").hide();
 
         // Hide the old description if there was one
-        $("#image_description_container").hide();
+        $("#description_container").hide();
 
         // Show loading message
-        $("#image_descrption_load_container").show();
+        $("#load_container").show();
 
         // Get image file
         var file : File = (<HTMLInputElement> this[0]).files[0];
@@ -86,7 +86,7 @@ function categoriesTable(data : any) : void {
 
     var categories = data.categories;
     for (let item of categories) {
-        $("#categories_table_body").append("<tr><td>" + item.name + "</td><td>" + Math.round(item.score * 100) + "%" + "</td></tr>");
+        $("#categories_table_body").append("<tr><td>" + item.name.slice(0,item.name.length-1) + "</td><td>" + Math.round(item.score * 100) + "%" + "</td></tr>");
     }
 }
 

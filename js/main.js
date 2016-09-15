@@ -8,9 +8,9 @@ $('#image_selection_form').submit(function (event) {
     // Hide selection submission
     $("#image_selection_submit_column").hide();
     // Hide the old description if there was one
-    $("#image_description_container").hide();
+    $("#description_container").hide();
     // Show loading message
-    $("#image_descrption_load_container").show();
+    $("#load_container").show();
     // Get image file
     var file = this[0].files[0];
     // Parameters for the POST request
@@ -66,7 +66,7 @@ function categoriesTable(data) {
     var categories = data.categories;
     for (var _i = 0, categories_1 = categories; _i < categories_1.length; _i++) {
         var item = categories_1[_i];
-        $("#categories_table_body").append("<tr><td>" + item.name + "</td><td>" + Math.round(item.score * 100) + "%" + "</td></tr>");
+        $("#categories_table_body").append("<tr><td>" + item.name.slice(0, item.name.length - 1) + "</td><td>" + Math.round(item.score * 100) + "%" + "</td></tr>");
     }
 }
 function listToString(myList) {
