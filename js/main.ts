@@ -14,9 +14,6 @@
         // Hide selection submission
         $("#image_selection_submit_column").hide();
 
-        // Hide the old description if there was one
-        $("#description_container").hide();
-
         // Show loading message
         $("#load_container").show();
 
@@ -62,6 +59,7 @@ function describeImage(data : any) : void {
     $("#load_container").hide();
     descriptionTable(data);
     categoriesTable(data);
+    facesTable(data);
 }
 
 function descriptionTable(data : any) : void {
@@ -80,13 +78,30 @@ function descriptionTable(data : any) : void {
 }
 
 function categoriesTable(data : any) : void {
-
     $("#categories_container").show();
     $("#categories_table_body").empty();
 
     var categories = data.categories;
     for (let item of categories) {
-        $("#categories_table_body").append("<tr><td>" + item.name.slice(0,item.name.length-1) + "</td><td>" + Math.round(item.score * 100) + "%" + "</td></tr>");
+        if(item.name.charAt(item.name.length) == '_') {
+            $("#categories_table_body").append("<tr><td>" + item.name.slice(0,item.name.length-1) + "</td><td>" + Math.round(item.score * 100) + "%" + "</td></tr>");
+        } else {
+            $("#categories_table_body").append("<tr><td>" + item.name + "</td><td>" + Math.round(item.score * 100) + "%" + "</td></tr>");
+        }
+    }
+}
+
+function facesTable(data : any) : void {
+    if(data.faces.length) {
+        $("#faces_container").show();
+        $("#faces_table_body").empty();
+
+        var faces = data.faces;
+        var count : number = 0;
+        for (let item of faces) {
+            count++;
+            $("#faces_table_body").append("<tr><td>" + count + "</td><td>" + item.age + "</td><td>" + item.gender + "</td></tr>");
+        }
     }
 }
 
@@ -121,4 +136,9 @@ function listToString(myList : string[]) : string {
     reader.readAsDataURL(this[0].files[0]);
 
     $("#image_selection_submit_column").show();
+
+    // Hide the old info if there was some
+    $("#description_container").hide();
+    $("#categories_container").hide();
+    $("#faces_container").hide();
 });

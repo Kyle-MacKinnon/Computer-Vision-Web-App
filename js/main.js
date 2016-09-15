@@ -7,8 +7,6 @@ $('#image_selection_form').submit(function (event) {
     event.preventDefault();
     // Hide selection submission
     $("#image_selection_submit_column").hide();
-    // Hide the old description if there was one
-    $("#description_container").hide();
     // Show loading message
     $("#load_container").show();
     // Get image file
@@ -48,6 +46,7 @@ function describeImage(data) {
     $("#load_container").hide();
     descriptionTable(data);
     categoriesTable(data);
+    facesTable(data);
 }
 function descriptionTable(data) {
     $("#description_container").show();
@@ -66,7 +65,25 @@ function categoriesTable(data) {
     var categories = data.categories;
     for (var _i = 0, categories_1 = categories; _i < categories_1.length; _i++) {
         var item = categories_1[_i];
-        $("#categories_table_body").append("<tr><td>" + item.name.slice(0, item.name.length - 1) + "</td><td>" + Math.round(item.score * 100) + "%" + "</td></tr>");
+        if (item.name.charAt(item.name.length) == '_') {
+            $("#categories_table_body").append("<tr><td>" + item.name.slice(0, item.name.length - 1) + "</td><td>" + Math.round(item.score * 100) + "%" + "</td></tr>");
+        }
+        else {
+            $("#categories_table_body").append("<tr><td>" + item.name + "</td><td>" + Math.round(item.score * 100) + "%" + "</td></tr>");
+        }
+    }
+}
+function facesTable(data) {
+    if (data.faces.length) {
+        $("#faces_container").show();
+        $("#faces_table_body").empty();
+        var faces = data.faces;
+        var count = 0;
+        for (var _i = 0, faces_1 = faces; _i < faces_1.length; _i++) {
+            var item = faces_1[_i];
+            count++;
+            $("#faces_table_body").append("<tr><td>" + count + "</td><td>" + item.age + "</td><td>" + item.gender + "</td></tr>");
+        }
     }
 }
 function listToString(myList) {
@@ -96,4 +113,8 @@ $('#image_selection_form').on('change', function () {
     };
     reader.readAsDataURL(this[0].files[0]);
     $("#image_selection_submit_column").show();
+    // Hide the old info if there was some
+    $("#description_container").hide();
+    $("#categories_container").hide();
+    $("#faces_container").hide();
 });
