@@ -109,42 +109,33 @@
     </div>
   </div>
 
-
-  <!-- Faces -->
-
-    <!--
-    <table class="table table-striped" style="border-radius:0px 0px 5px 5px;" id="desc-table">
-      <thead>
-          <tr>
-            <th>Name</th>
-            <th>City</th>
-            <th>Pincode</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr>
-            <td>Tanmay</td>
-            <td>Bangalore</td>
-            <td>560001</td>
-          </tr>
-          
-          <tr>
-            <td>Sachin</td>
-            <td>Mumbai</td>
-            <td>400003</td>
-          </tr>
-          
-          <tr>
-            <td>Uma</td>
-            <td>Pune</td>
-            <td>411027</td>
-          </tr>
-      </tbody>
-    </table>
+  <!-- Image Type -->
+  <div class="container" id="type_container">
+    <div class="col-xs-12">
+      <span class="label label-primary table-header">Image Type</span>
+      <label class="form-control" style="border-radius:0px 5px 5px 5px; margin-bottom: 20px; font-weight: normal;" id="type_sentence"></label>
+    </div>
   </div>
 
-  -->
-
+  <!-- Color -->
+  <div class="container" id="colors_container">
+    <div class="col-xs-12">
+      <span class="label label-primary table-header">Colors</span>
+      <table class="table table-striped table-config" id="colors_table">
+        <thead>
+            <tr>
+              <th>Dominant Foreground Color</th>
+              <th>Dominant Background Color</th>
+              <th>Accent Color</th>
+            </tr>
+        </thead>
+        <tbody id="colors_table_body">
+          <!-- Filled by JS -->
+        </tbody>
+      </table>
+      <label class="form-control" style="border-radius:5px 5px 5px 5px; margin-top: 30px; margin-bottom: 30px; font-weight: normal;" id="colors_sentence"></label>
+    </div>
+  </div>
   
   <!-- jQuery -->
   <script src="./node_modules/jquery/dist/jquery.min.js"></script>

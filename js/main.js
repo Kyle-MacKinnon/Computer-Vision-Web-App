@@ -47,7 +47,12 @@ function describeImage(data) {
     descriptionTable(data);
     categoriesTable(data);
     facesTable(data);
+    typeTable(data);
+    colorsTable(data);
 }
+/*
+    Description Table
+*/
 function descriptionTable(data) {
     $("#description_container").show();
     $("#desc_sentence").empty();
@@ -56,9 +61,12 @@ function descriptionTable(data) {
     captionText = captionText.charAt(0).toUpperCase() + captionText.slice(1) + ".";
     $("#desc_sentence").append(captionText);
     $("#desc_table_body").empty();
-    var tags = listToString(data.description.tags);
+    var tags = arrayToString(data.description.tags);
     $("#desc_table_body").append("<tr><td>Confidence</td><td>" + Math.round(data.description.captions[0].confidence * 100) + "%" + "</td></tr><tr><td>Tags</td><td>" + tags + "</td></tr>");
 }
+/*
+    Categories Table
+*/
 function categoriesTable(data) {
     $("#categories_container").show();
     $("#categories_table_body").empty();
@@ -73,6 +81,9 @@ function categoriesTable(data) {
         }
     }
 }
+/*
+    Faces Table
+*/
 function facesTable(data) {
     if (data.faces.length) {
         $("#faces_container").show();
@@ -86,14 +97,52 @@ function facesTable(data) {
         }
     }
 }
-function listToString(myList) {
-    var myString = "";
-    for (var _i = 0, myList_1 = myList; _i < myList_1.length; _i++) {
-        var item = myList_1[_i];
-        myString += item;
-        if (item != myList[myList.length]) {
-            myString += ", ";
+/*
+    Type Table
+*/
+function typeTable(data) {
+    $("#type_container").show();
+    $("#type_sentence").empty();
+    var clipArt = data.imageType.clipArtType;
+    var lineDrawing = data.imageType.lineDrawingType;
+    var description = "";
+    if (lineDrawing == 1) {
+        description += "This image is a line drawing.";
+    }
+    else {
+        if (clipArt == 0) {
+            description += "This image is a photograph.";
         }
+        if (clipArt == 1) {
+            description += "This image might be a photograph or it might be clipart. It is ambigious.";
+        }
+        if (clipArt > 1) {
+            description += "This image is clipart.";
+        }
+    }
+    $('#type_sentence')[0].innerText = description;
+}
+/*
+    Colors Table
+*/
+function colorsTable(data) {
+    $("#colors_container").show();
+    $("#colors_table_body").empty();
+    $("#colors_sentence").empty();
+    var color = data.color;
+    $("#colors_table_body").append("<tr><td>" + color.dominantColorForeground + "</td><td>" + color.dominantColorBackground + "</td><td>" + "#" + color.accentColor + "</td></tr>");
+    var dominantColors = arrayToString(color.dominantColors);
+    $('#colors_sentence')[0].innerText = "Dominant colors: " + dominantColors;
+}
+/*
+    Array to String
+*/
+function arrayToString(myArray) {
+    var myString = "";
+    for (var _i = 0, myArray_1 = myArray; _i < myArray_1.length; _i++) {
+        var item = myArray_1[_i];
+        myString += item;
+        myString += ", ";
     }
     myString = myString.substring(0, myString.length - 2);
     return myString;
@@ -117,4 +166,6 @@ $('#image_selection_form').on('change', function () {
     $("#description_container").hide();
     $("#categories_container").hide();
     $("#faces_container").hide();
+    $("#type_container").hide();
+    $("#colors_container").hide();
 });

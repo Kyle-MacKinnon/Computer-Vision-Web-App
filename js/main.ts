@@ -60,8 +60,13 @@ function describeImage(data : any) : void {
     descriptionTable(data);
     categoriesTable(data);
     facesTable(data);
+    typeTable(data);
+    colorsTable(data);
 }
 
+/*
+    Description Table
+*/
 function descriptionTable(data : any) : void {
     $("#description_container").show();
     $("#desc_sentence").empty();
@@ -73,10 +78,13 @@ function descriptionTable(data : any) : void {
     $("#desc_sentence").append(captionText);
     $("#desc_table_body").empty();
 
-    var tags : string = listToString(data.description.tags);
+    var tags : string = arrayToString(data.description.tags);
     $("#desc_table_body").append("<tr><td>Confidence</td><td>" + Math.round(data.description.captions[0].confidence * 100) + "%" +"</td></tr><tr><td>Tags</td><td>" + tags + "</td></tr>");
 }
 
+/*
+    Categories Table
+*/
 function categoriesTable(data : any) : void {
     $("#categories_container").show();
     $("#categories_table_body").empty();
@@ -91,6 +99,9 @@ function categoriesTable(data : any) : void {
     }
 }
 
+/*
+    Faces Table
+*/
 function facesTable(data : any) : void {
     if(data.faces.length) {
         $("#faces_container").show();
@@ -105,13 +116,51 @@ function facesTable(data : any) : void {
     }
 }
 
-function listToString(myList : string[]) : string {
-    var myString : string = "";
-    for (let item of myList) {
-        myString += item;
-        if(item != myList[myList.length]) {
-            myString += ", ";
+/*
+    Type Table
+*/
+function typeTable(data : any) : void {
+        $("#type_container").show();
+        $("#type_sentence").empty();
+
+        var clipArt = data.imageType.clipArtType;
+        var lineDrawing = data.imageType.lineDrawingType;
+
+        var description = "";
+        if(lineDrawing == 1) {
+            description += "This image is a line drawing.";
+        } else {
+            if(clipArt == 0) { description += "This image is a photograph."; }
+            if(clipArt == 1) { description += "This image might be a photograph or it might be clipart. It is ambigious."; }
+            if(clipArt > 1)  { description += "This image is clipart."; }
         }
+        $('#type_sentence')[0].innerText = description;
+
+}
+
+/*
+    Colors Table
+*/
+function colorsTable(data : any) : void {
+    $("#colors_container").show();
+    $("#colors_table_body").empty();
+    $("#colors_sentence").empty();
+
+    var color = data.color;
+    $("#colors_table_body").append("<tr><td>" + color.dominantColorForeground + "</td><td>" + color.dominantColorBackground + "</td><td>" + "#" + color.accentColor + "</td></tr>");
+
+    var dominantColors : string = arrayToString(color.dominantColors);
+    $('#colors_sentence')[0].innerText = "Dominant colors: " + dominantColors;
+}
+
+/*
+    Array to String
+*/
+function arrayToString(myArray : string[]) : string {
+    var myString : string = "";
+    for (let item of myArray) {
+        myString += item;
+        myString += ", ";
     }
     myString = myString.substring(0,myString.length -2)
     return myString;
@@ -120,7 +169,7 @@ function listToString(myList : string[]) : string {
 /*
     Image selection form update
 */
- $('#image_selection_form').on('change', function() : void {
+$('#image_selection_form').on('change', function() : void {
 
     var file : File = (<HTMLInputElement> this[0]).files[0];
 
@@ -141,4 +190,6 @@ function listToString(myList : string[]) : string {
     $("#description_container").hide();
     $("#categories_container").hide();
     $("#faces_container").hide();
+    $("#type_container").hide();
+    $("#colors_container").hide();
 });

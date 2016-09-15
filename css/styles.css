@@ -6,7 +6,15 @@
     border-radius:5px 5px 0px 0px !important;
 }
 
-.top-buffer { margin-top:20px; }
+.top-buffer { margin-top:30px; }
+
+body .container {
+    margin-bottom: 30px;
+}
+
+label {
+    border-color: #DDDDDD !important;
+}
 
 body #image_input_container { text-align: center; margin-bottom: 60px;}
 body #image_selection_submit { display: none; }
@@ -15,6 +23,8 @@ body #image_selection_label { display: none; padding-right: 74px; }
 body #description_container { display:none; }
 body #categories_container { display:none; }
 body #faces_container { display:none; }
+body #type_container { display:none; }
+body #colors_container { display:none; }
 body #desc_table_body tr td:first-child { width:20%; font-weight:bold;}
 
 .table-config {
