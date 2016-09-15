@@ -58,11 +58,14 @@
 /*
     Image file description
 */
-function describeImage(data) : void {
+function describeImage(data : any) : void {
+    $("#load_container").hide();
+    descriptionTable(data);
+    categoriesTable(data);
+}
 
-    $("#image_descrption_load_container").hide();
-    $("#image_description_container").show();
-
+function descriptionTable(data : any) : void {
+    $("#description_container").show();
     $("#desc_sentence").empty();
 
     // Make the description look more appealing
@@ -70,19 +73,33 @@ function describeImage(data) : void {
     captionText = captionText.charAt(0).toUpperCase() + captionText.slice(1) + ".";
 
     $("#desc_sentence").append(captionText);
-
     $("#desc_table_body").empty();
 
-    var tags : string = "";
-    for (let tag of data.description.tags) {
-        tags += tag;
-        if(tag != data.description.tags[data.description.tags.length]) {
-            tags += ", ";
+    var tags : string = listToString(data.description.tags);
+    $("#desc_table_body").append("<tr><td>Confidence</td><td>" + Math.round(data.description.captions[0].confidence * 100) + "%" +"</td></tr><tr><td>Tags</td><td>" + tags + "</td></tr>");
+}
+
+function categoriesTable(data : any) : void {
+
+    $("#categories_container").show();
+    $("#categories_table_body").empty();
+
+    var categories = data.categories;
+    for (let item of categories) {
+        $("#categories_table_body").append("<tr><td>" + item.name + "</td><td>" + Math.round(item.score * 100) + "%" + "</td></tr>");
+    }
+}
+
+function listToString(myList : string[]) : string {
+    var myString : string = "";
+    for (let item of myList) {
+        myString += item;
+        if(item != myList[myList.length]) {
+            myString += ", ";
         }
     }
-    tags = tags.substring(0,tags.length -2)
-    
-    $("#desc_table_body").append("<tr><td>Confidence:</td><td>" + data.description.captions[0].confidence + "</td></tr><tr><td>Tags:</td><td>" + tags + "</td></tr>");
+    myString = myString.substring(0,myString.length -2)
+    return myString;
 }
 
 /*

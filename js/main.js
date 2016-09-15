@@ -45,24 +45,41 @@ $('#image_selection_form').submit(function (event) {
     Image file description
 */
 function describeImage(data) {
-    $("#image_descrption_load_container").hide();
-    $("#image_description_container").show();
+    $("#load_container").hide();
+    descriptionTable(data);
+    categoriesTable(data);
+}
+function descriptionTable(data) {
+    $("#description_container").show();
     $("#desc_sentence").empty();
     // Make the description look more appealing
     var captionText = data.description.captions[0].text;
     captionText = captionText.charAt(0).toUpperCase() + captionText.slice(1) + ".";
     $("#desc_sentence").append(captionText);
     $("#desc_table_body").empty();
-    var tags = "";
-    for (var _i = 0, _a = data.description.tags; _i < _a.length; _i++) {
-        var tag = _a[_i];
-        tags += tag;
-        if (tag != data.description.tags[data.description.tags.length]) {
-            tags += ", ";
+    var tags = listToString(data.description.tags);
+    $("#desc_table_body").append("<tr><td>Confidence</td><td>" + Math.round(data.description.captions[0].confidence * 100) + "%" + "</td></tr><tr><td>Tags</td><td>" + tags + "</td></tr>");
+}
+function categoriesTable(data) {
+    $("#categories_container").show();
+    $("#categories_table_body").empty();
+    var categories = data.categories;
+    for (var _i = 0, categories_1 = categories; _i < categories_1.length; _i++) {
+        var item = categories_1[_i];
+        $("#categories_table_body").append("<tr><td>" + item.name + "</td><td>" + Math.round(item.score * 100) + "%" + "</td></tr>");
+    }
+}
+function listToString(myList) {
+    var myString = "";
+    for (var _i = 0, myList_1 = myList; _i < myList_1.length; _i++) {
+        var item = myList_1[_i];
+        myString += item;
+        if (item != myList[myList.length]) {
+            myString += ", ";
         }
     }
-    tags = tags.substring(0, tags.length - 2);
-    $("#desc_table_body").append("<tr><td>Confidence:</td><td>" + data.description.captions[0].confidence + "</td></tr><tr><td>Tags:</td><td>" + tags + "</td></tr>");
+    myString = myString.substring(0, myString.length - 2);
+    return myString;
 }
 /*
     Image selection form update

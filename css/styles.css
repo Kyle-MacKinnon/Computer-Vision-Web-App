@@ -12,7 +12,8 @@ body #image_input_container { text-align: center; margin-bottom: 60px;}
 body #image_selection_submit { display: none; }
 body #image_selection_label { display: none; padding-right: 74px; }
 
-body #image_description_container { display:none; }
+body #description_container { display:none; }
+body #categories_container { display:none; }
 body #desc_table_body tr td:first-child { width:20%; font-weight:bold;}
 
 .table-config {
@@ -32,6 +33,7 @@ body #desc_table_body tr td:first-child { width:20%; font-weight:bold;}
 .table-config thead th {
     border-bottom: 1px solid #DDDDDD !important;
     border-right: 1px solid #DDDDDD;
+    text-align:center;
 }
 
 .table-config thead th:last-child {

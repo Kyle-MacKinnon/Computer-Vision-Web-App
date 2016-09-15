@@ -25,7 +25,7 @@
   <div class="jumbotron text-center">
     <img src="eye-logo.png" alt="Logo of abstractly drawn eye. ">
     <h1>Computer Vision API</h1>
-    <p>A simple demonstration of the Microsoft Cognative Services computer vision API</p>
+    <p>A simple demonstration of the Computer Vision API from Microsoft Cognitive Services</p>
   </div>
 
   <!-- Image Input -->
@@ -53,14 +53,14 @@
   </div>
 
   <!-- Loading -->
-  <div class="container" id="image_descrption_load_container" style="display: none;">
+  <div class="container" id="load_container" style="display: none;">
     <div class="col-xs-12">
       <h3>Loading...</h3>
     </div>
   </div>
   
   <!-- Image Description -->
-  <div class="container" id="image_description_container">
+  <div class="container" id="description_container">
     
     <div class="col-xs-12">
     <!-- Description -->
@@ -78,8 +78,40 @@
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
+
+  <div class="container" id="categories_container">
+    <div class="col-xs-12">
+      <span class="label label-primary table-header">Categories</span>
+      <table class="table table-striped table-config" id="categories_table">
+      <thead>
+          <tr>
+            <th>Category</th>
+            <th>Confidence</th>
+          </tr>
+      </thead>
+      <tbody id="categories_table_body">
+          <tr>
+            <td>Tanmay</td>
+            <td>Bangalore</td>
+          </tr>
+          
+          <tr>
+            <td>Sachin</td>
+            <td>Mumbai</td>
+          </tr>
+          
+          <tr>
+            <td>Uma</td>
+            <td>Pune</td>
+          </tr>
+      </tbody>
+    </table>
   </div>
+</div>
+
+
 
   <!-- Faces -->
 
